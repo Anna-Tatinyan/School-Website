@@ -2,6 +2,8 @@ var express = require('express');
 const server = require("../server")
 var router = express.Router();
 
+require('dotenv').config()
+
 // Home page route.
 router.get('/', function (req, res) {
   res.send('Wiki home page');

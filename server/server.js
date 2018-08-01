@@ -1,6 +1,6 @@
 const express = require('express');
 
-require('dotenv').config()
+require('dotenv').config();
 
 const app = express();
 // var router = require('./routes/route.js');
@@ -12,7 +12,7 @@ app.use(express.json());
 
 
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', ['*']);
+    res.append('Access-Control-Allow-Origin', [process.env.HOST]);
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.append('Access-Control-Allow-Headers', 'Content-Type');
     next();
@@ -21,5 +21,5 @@ app.use((req, res, next) => {
 
 
 
-const port = process.env.PORT || process.env.SERVER_PORT;
+const port = process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));

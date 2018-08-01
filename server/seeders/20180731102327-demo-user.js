@@ -12,6 +12,10 @@ module.exports = {
       }], {});
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Users', null, {});
+    return queryInterface.bulkDelete('Foo', {
+      where: {
+        email:'admin_super@gmail.com'
+      }
+    })
   }
-};
+}

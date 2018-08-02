@@ -2,32 +2,30 @@ import validator from 'validator';
 
 import actionConstant  from '../constants/actionConstant';
 
-export function setLoginPending(isLoginPending) {
-  return {
-    type: actionConstant.LOGIN_PENDING,
-    isLoginPending
+
+
+import fetch from "isomorphic-fetch";
+
+export function loginError(error) {
+  return { error, type: actionConstant.LOGGED_FAILED };
+}
+
+// You'll have a side effect here so (dispatch) => {} form is a good idea
+export function loginSuccess(response) {
+  return dispatch => {
+    dispatch({ response, type: actionConstant.LOGGED_SUCCESSFULLY });
+    // router.transitionTo('/dashboard');
   };
 }
 
+export function loginRequest(email, password) {
+  const user = {email: email, password: password};
+  return { user, type: actionConstant.LOGIN_ATTEMPT };
+}
 
 export function isButtonEnabled() {
   return {
     type: actionConstant.ENABLE_BUTTON,
-  }
-}
-
-
-export function setLoginSuccess(isLoginSuccess) {
-  return {
-    type: actionConstant.LOGIN_SUCCESS,
-    isLoginSuccess
-  };
-}
-
-export function setLoginError(loginError) {
-  return {
-    type: actionConstant.LOGIN_FAILURE,
-    loginError
   }
 }
 
@@ -46,33 +44,33 @@ export function  setPassword(e){
 }
 
 export function login(email, password) {
-  return dispatch => {
-    dispatch(setLoginPending(true));
-    dispatch(setLoginSuccess(false));
-    dispatch(setLoginError(null));
-
-    loginAPICalls(email, password, error => {
-
-      dispatch(setLoginPending(false));
-      if (!error) {
-        dispatch(setLoginSuccess(true));
+  return dispatch =>
+    fetch('http://localhost:3040/api/login', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        "email": email,
+        "password": password,
+      }),
+    })
+    .then(response => {
+      if (response.status >= 200 && response.status < 300) {
+        console.log(response);
+        dispatch(loginSuccess(response.statusText));
       } else {
-        dispatch(setLoginError(error));
+          console.log(response);
+        const error = new Error(response.statusText);
+        error.response = response;
+        dispatch(loginError(error));
       }
-    });
-  }
+    })
+    .catch(error => { console.log('request failed', error); });
 }
 
-function loginAPICalls(email, password, callback) {
-  setTimeout(() => {
-    if (email === 'example.com' && password === 'admin123') {
 
-      return callback(null);
-    } else {
-      return callback(new Error('Invalid email and password'));
-    }
-  }, 1000);
-}
 
 export function formRequirments(email, password) {
     console.log(email, password)

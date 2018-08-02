@@ -9,13 +9,16 @@ class Login extends React.Component {
 
 
     submitHandler = (e) => {
+      alert("submit")
         e.preventDefault();
         let { email, password } = this.props;
         this.props.login(email, password);
 
     }
+       // dispatch like you usually do
 
     componentDidUpdate = () => {
+
       const email = this.props.email;
       const password = this.props.password;
       if(password !== undefined && email !== undefined) {
@@ -38,7 +41,7 @@ class Login extends React.Component {
   }
     render() {
 
-      const {isLoginPending, isLoginSuccess, loginError} = this.props
+      const {isLoggingIn, isLoggedIn, error} = this.props
         return (
           <div className="limiter">
   		       <div className="container-login100" style={{backgroundImage: "url(https://i0.wp.com/switchee.co/wp-content/uploads/2014/04/blurred-bg.jpg)"}}>
@@ -78,9 +81,9 @@ class Login extends React.Component {
             </button>
   					</div>
             <div className="message">
-            { isLoginPending && <div>Please wait...</div> }
-            { isLoginSuccess && <div>Success.</div> }
-            { loginError && <div>{loginError.message}</div> }
+            { isLoggingIn && <div>Please wait...</div> }
+            { isLoggedIn && <div>Success.</div> }
+            { error && <div>{error.message}</div> }
           </div>
   				</form>
   			</div>
@@ -92,12 +95,13 @@ class Login extends React.Component {
 
   const mapStateToProps = (state) => {
     return {
-      isLoginPending: state.isLoginPending,
-      isLoginSuccess: state.isLoginSuccess,
-      loginError: state.loginError,
       email: state.email,
       password: state.password,
-      buttonIsDisabled: state.buttonIsDisabled
+      buttonIsDisabled: state.buttonIsDisabled,
+      isLoggingIn: state.isLoggingIn,
+      isLoggedIn: state.isLoggedIn,
+      error: state.error
+
     };
   }
 

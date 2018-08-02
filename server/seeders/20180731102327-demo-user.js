@@ -5,17 +5,13 @@ module.exports = {
     return queryInterface.bulkInsert('Users', [{
         firstName: 'Admin',
         lastName: '',
-        email: 'admin_super@gmail.com',
+        email: 'anna.tatinyan.21@mail.ru',
         password: "123",
         createdAt: new Date(),
         updatedAt: new Date()
       }], {});
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('Foo', {
-      where: {
-        email:'admin_super@gmail.com'
-      }
-    })
+    return queryInterface.bulkDelete('Users', null, {});
   }
 }

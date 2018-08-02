@@ -3,9 +3,8 @@ const express = require('express');
 require('dotenv').config();
 
 const app = express();
-// var router = require('./routes/route.js');
-// // ...
-// app.use('./routes/route.js'), route);
+var loginRouter = require('./routes/router.js');
+// ...
 
 
 app.use(express.json());
@@ -17,6 +16,19 @@ app.use((req, res, next) => {
     res.append('Access-Control-Allow-Headers', 'Content-Type');
     next();
 });
+
+
+
+
+const router = express.Router();
+// test route
+app.use('/api', router);
+router.get('/', function(req, res) {
+    res.json({ message: 'welcome to our upload module apis' });
+});
+
+//route to handle user registration
+router.post('/login',loginRouter.login)
 
 const port = process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));

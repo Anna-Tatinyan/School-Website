@@ -6,4 +6,6 @@ export default class actionConstant {
     static SET_EMAIL = "SET_EMAIL"
     static SET_PASSWORD = "SET_PASSWORD"
     static ENABLE_BUTTON = "ENABLE_BUTTON"
+    
+
 };

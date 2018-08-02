@@ -1,8 +1,8 @@
 import React from 'react';
 import { Router, Route, IndexRoute, Switch } from 'react-router';
 
-import App from './container/app.js';
-import LoginPage from './components/login/login.js';
+import App from './container/App.js';
+import LoginPage from './components/login/Login.js';
 import Error from './components/error/Error.js';
 import { createBrowserHistory } from 'history';
 

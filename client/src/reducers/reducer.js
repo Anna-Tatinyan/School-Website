@@ -4,7 +4,10 @@ import actionConstant from "../constants/actionConstant"
 const initialState = {
   isLoginSuccess: false,
   isLoginPending: false,
-  loginError: null
+  loginError: null,
+  email: '',
+  password: "mother",
+  buttonIsDisabled: true
 };
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -23,6 +26,22 @@ export default function reducer(state = initialState, action) {
         loginError: action.loginError
       });
 
+    case actionConstant.SET_EMAIL: {
+      return Object.assign({}, state, {
+        email: action.e
+      });
+    }
+    case actionConstant.SET_PASSWORD: {
+      return Object.assign({}, state, {
+        password: action.e
+      });
+    }
+    case actionConstant.ENABLE_BUTTON:{
+      return {
+        ...state,
+        buttonIsDisabled: false
+      }
+    }
     default:
       return state;
   }

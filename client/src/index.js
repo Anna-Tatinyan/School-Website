@@ -4,8 +4,8 @@ import './index.css';
 import {Provider} from "react-redux";
 import Router from './routes'
 import store from "./store";
-import App from "./container/app";
-import Login from "./components/login/login"
+import App from "./container/App";
+import Login from "./components/login/Login"
 
 
 ReactDOM.render(

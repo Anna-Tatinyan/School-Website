@@ -1,9 +1,13 @@
 const express = require('express');
+const app = express();
 
+const router = express.Router();
 require('dotenv').config();
 
-const app = express();
-var loginRouter = require('./routes/loginRoute.js');
+
+var getRoute = require('./routes/getRoute');
+var postRoute = require('./routes/postRoute');
+
 
 app.use(express.json());
 
@@ -14,15 +18,10 @@ app.use((req, res, next) => {
     next();
 });
 
-const router = express.Router();
-// test route
-app.use('/api', router);
-router.get('/', function(req, res) {
-    res.json({ message: 'welcome to our upload module apis' });
-});
 
-//route to handle user registration
-router.post('/login',loginRouter.login)
+
+app.use('/', getRoute);
+app.use('/', postRoute);
 
 const port = process.env.PORT;
 app.listen(port, () => console.log(`Listening on port ${port}`));

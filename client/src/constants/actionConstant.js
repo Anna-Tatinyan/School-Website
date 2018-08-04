@@ -1,15 +1,10 @@
 export default class actionConstant {
-    static LOGIN_PENDING = 'SET_LOGIN_PENDING';
-    static LOGIN_SUCCESS = 'SET_LOGIN_SUCCESS';
-    static LOGIN_FAILURE = 'SET_LOGIN_ERROR';
-    static SET_VALUE = 'SET_VALUE'
-    static SET_EMAIL = "SET_EMAIL"
-    static SET_PASSWORD = "SET_PASSWORD"
-    static ENABLE_BUTTON = "ENABLE_BUTTON"
-    static LOGIN_ATTEMPT = "LOGIN_ATTEMPT"
-    static LOGGED_FAILED = "LOGGED_FAILED"
-    static LOGGED_SUCCESSFULLY = "LOGGED_SUCCESSFULLY"
-
-
+    static SET_EMAIL = "SET_EMAIL";
+    static SET_PASSWORD = "SET_PASSWORD";
+    static ENABLE_BUTTON = "ENABLE_BUTTON";
+    static LOGIN_ATTEMPT = "LOGIN_ATTEMPT";
+    static LOGGED_FAILED = "LOGGED_FAILED";
+    static LOGGED_SUCCESSFULLY = "LOGGED_SUCCESSFULLY";
+    static LOGOUT = "LOGOUT";
 
 };

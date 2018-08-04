@@ -1,27 +1,10 @@
-import validator from 'validator';
-
 import actionConstant  from '../constants/actionConstant';
-
-
-
+import validator from 'validator';
+import history from "../history";
+import { loginError, loginSuccess, loginRequest } from './statusActions';
 import fetch from "isomorphic-fetch";
 
-export function loginError(error) {
-  return { error, type: actionConstant.LOGGED_FAILED };
-}
 
-// You'll have a side effect here so (dispatch) => {} form is a good idea
-export function loginSuccess(response) {
-  return dispatch => {
-    dispatch({ response, type: actionConstant.LOGGED_SUCCESSFULLY });
-    // router.transitionTo('/dashboard');
-  };
-}
-
-export function loginRequest(email, password) {
-  const user = {email: email, password: password};
-  return { user, type: actionConstant.LOGIN_ATTEMPT };
-}
 
 export function isButtonEnabled() {
   return {
@@ -45,7 +28,8 @@ export function  setPassword(e){
 
 export function login(email, password) {
   return dispatch =>
-    fetch('http://localhost:3040/api/login', {
+
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/login`, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -57,28 +41,39 @@ export function login(email, password) {
       }),
     })
     .then(response => {
-      if (response.status >= 200 && response.status < 300) {
-        console.log(response);
-        dispatch(loginSuccess(response.statusText));
+      return response.json();
+    })
+    .then(response => {
+      if (response.code >= 200 && response.code < 300) {
+
+        if(response.token) {
+          localStorage.setItem('user', JSON.stringify(response.token));
+          dispatch(loginSuccess(response.message));
+          history.push('/Admin');
+        }
+
       } else {
-          console.log(response);
-        const error = new Error(response.statusText);
+        const error = new Error(response.message);
         error.response = response;
         dispatch(loginError(error));
       }
     })
+
     .catch(error => { console.log('request failed', error); });
 }
 
 
+export function logout() {
+  return { type: actionConstant.LOGOUT };
+}
+
 
 export function formRequirments(email, password) {
-    console.log(email, password)
+
     const validateEmail = validator.isEmail(email);
     const passwordValidate = validator.isLength(password, { min: 3 });
     const emptyEmail = validator.isEmpty(email);
     const emptyPassword = validator.isEmpty(password);
-
     return validateEmail && !emptyPassword && !emptyEmail && passwordValidate
 
 }

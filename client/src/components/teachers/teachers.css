@@ -115,9 +115,6 @@ button:active {
 	background-color: #f2f2f2;
 }
 
-.btn-info {
-	margin: 40px -90% 0 80%;
-}
 
 .teachers tr:hover {
 	background-color: #ddd;
@@ -141,10 +138,7 @@ button:active {
 	margin: 40px 0 -50%;
 }
 
-.buttons {
-	display: flex;
-	flex-direction: row
-}
+
 
 .btn-info {
 	margin: 10% 10px 0 42%

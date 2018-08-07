@@ -2,7 +2,6 @@
 module.exports = (sequelize, DataTypes) => {
   var Classes = sequelize.define('Classes', {
     name: DataTypes.STRING,
-    email: DataTypes.STRING,
     description: DataTypes.TEXT
   }, {});
   Classes.associate = function(models) {

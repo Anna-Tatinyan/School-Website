@@ -1,6 +1,6 @@
-import actionConstant  from '../constants/actionConstant';
+import actionConstant  from '../../constants/actionConstant';
 import validator from 'validator';
-import history from "../history";
+import history from "../../history";
 import { loginError, loginSuccess, loginRequest } from './statusActions';
 import fetch from "isomorphic-fetch";
 

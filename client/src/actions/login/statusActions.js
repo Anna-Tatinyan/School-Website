@@ -1,4 +1,4 @@
-import actionConstant  from '../constants/actionConstant';
+import actionConstant  from '../../constants/actionConstant';
 
 
 export function loginError(error) {
@@ -13,6 +13,6 @@ export function loginRequest(email, password) {
 export function loginSuccess(response) {
   return dispatch => {
     dispatch({ response, type: actionConstant.LOGGED_SUCCESSFULLY });
-  
+
   };
 }

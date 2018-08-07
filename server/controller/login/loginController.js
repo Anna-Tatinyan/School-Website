@@ -1,4 +1,4 @@
-const {Users} = require('../models/index');
+const {Users} = require('../../models/index');
 const sequelize = require('sequelize');
 const express = require('express');
 const create = require('./tokenCreator.js');

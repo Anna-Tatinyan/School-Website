@@ -28,7 +28,6 @@ class Teachers extends React.Component {
     }
   }
     addTeacher = (e) => {
-          e.preventDefault();
           const firstName = this.addFirstName.value;
           const lastName = this.addlastName.value;
           const age = this.addAge.value
@@ -160,7 +159,7 @@ class Teachers extends React.Component {
                   <input type="text" id="alname" name="age" defaultValue={this.updatedTeacherObject.age} onChange={ e=> this.updatedTeacherObject.age=e.target.value}/>
                   <input type="text" id="glname" name="gender" defaultValue={this.updatedTeacherObject.gender} onChange={ e=> this.updatedTeacherObject.gender=e.target.value}/>
                   <div className="button-question">
-                    <button className = "actions" onClick={ (e)=>{this.updateTeacher(e);this.props.isModalOpen()}}> edit </button>
+                    <button className = "actions" onClick={ (e)=>{this.updateTeacher(e); this.props.isModalOpen()}}> edit </button>
                     <button className = "actions" onClick={this.props.isModalOpen}>close</button>
                   </div>
               </form>

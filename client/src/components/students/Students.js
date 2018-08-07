@@ -29,7 +29,6 @@ class Students extends React.Component {
   }
 
   addStudent = (e) => {
-        e.preventDefault();
         const firstName = this.addFirstName.value;
         const lastName = this.addlastName.value;
         const age = this.addAge.value

@@ -4,3 +4,23 @@
   margin-left: auto;
    margin-right: auto;
 }
+
+.gif {
+  width: 100%;
+  z-index: 1
+}
+
+.errorRight {
+  position: absolute;
+   top: 8px;
+   right: 16px;
+}
+.errorBottom {
+  position: absolute;
+  top:50px;
+  right: 16px
+}
+.error-div {
+  display: flex;
+  flex-direction: column
+}

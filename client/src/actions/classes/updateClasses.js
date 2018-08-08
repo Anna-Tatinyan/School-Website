@@ -2,18 +2,18 @@ import actionConstant  from '../../constants/actionConstant';
 import fetch from "isomorphic-fetch";
 
 
-export function updateClasses(id, description) {
+export function updateClasses(input) {
   return dispatch =>
 
-    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/admin/classes`, {
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/admin/classes/${input.id}`, {
       method: 'put',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        "id": id,
-        "description": description
+        "id": input.id,
+        "description": input.description
 
       }),
     })

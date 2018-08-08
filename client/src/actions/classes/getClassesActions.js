@@ -23,7 +23,6 @@ export function getClasses() {
 
     })
     .then(response => {
-      console.log(response)
         dispatch(getClassesArray(response));
 
     })

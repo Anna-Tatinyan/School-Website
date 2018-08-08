@@ -4,12 +4,11 @@ const express = require('express');
 
 
 exports.deleteClasses= function(req,res){
-  const id = req.body.id;
-  Classes.destroy({where : {id: id}})
+  Classes.destroy({where : {id: req.param('id')}})
   .then((classes) => {
     res.send({
       "code":200,
-      "message": "Class was deleted"
+      "message": "class was deleted"
     });
   }).catch(function(error){
     res.send({

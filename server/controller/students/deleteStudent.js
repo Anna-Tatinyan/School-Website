@@ -4,8 +4,8 @@ const express = require('express');
 
 
 exports.deleteStudent = function(req,res){
-  const id = req.body.id;
-  Students.destroy({where : {id: id}})
+
+  Students.destroy({where : {id: req.param('id')}})
   .then((students) => {
     res.send({
       "code":200,

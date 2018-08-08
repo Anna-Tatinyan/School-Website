@@ -5,7 +5,7 @@ export function deleteClasses(id) {
 
   return dispatch =>
 
-    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/admin/classes`, {
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/admin/classes/${id}`, {
       method: 'delete',
       headers: {
         'Accept': 'application/json',

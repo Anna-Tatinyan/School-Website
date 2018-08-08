@@ -4,7 +4,7 @@ import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import  history  from '../../history';
-import { logout, getClasses, deleteClasses, addClasses, updateClasses  } from '../../actions/';
+import { logout, rawDetecor,isModalOpen, getClasses, deleteClasses, addClasses, updateClasses  } from '../../actions/';
 
 import SideNav, { Nav, NavIcon, NavText } from 'react-sidenav';
 import SvgIcon from 'react-icons-kit';
@@ -13,12 +13,23 @@ import {book} from 'react-icons-kit/oct/book';
 import {university} from 'react-icons-kit/ionicons/university';
 import {home} from 'react-icons-kit/iconic/home';
 
-
+import Modal from '../modal.js'
 
 
 class Classes extends React.Component {
+  constructor(props){
+  super(props);
+
+  this.updatedClassObject = {
+    firstName: null,
+    lastName: null,
+    age: null,
+    gender: null,
+    phone: null,
+    email: null
+  }
+}
   addClasses = (e) => {
-        e.preventDefault();
         const name = this.addName.value;
         const description = this.addDescription.value;
 
@@ -27,19 +38,9 @@ class Classes extends React.Component {
         this.props.getClasses();
     };
 
-  deleteClasses = (e) => {
-        e.preventDefault();
-        const id = this.deleteId.value;
-
-        this.props.deleteClasses(id);
-        this.props.getClasses();
-    };
-
   updateClasses = (e) => {
-        e.preventDefault();
-        const id = this.updateId.value;
-        const description = this.updateDescription.value
-        this.props.updateClasses(id,description)
+
+        this.props.updateClasses(this.updatedClassObject)
         this.props.getClasses();
     };
 
@@ -102,32 +103,6 @@ class Classes extends React.Component {
           </div>
       </div>
   </div>
-  <div>
-      <button type="button" className="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal">
-          Edit Class
-      </button>
-      <div className="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog" role="document">
-              <div className="modal-content">
-                  <div className="modal-header">
-                      <h4 className="modal-title" id="exampleModalLabel">Edit a Class</h4>
-                      <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                      </button>
-                  </div>
-                  <div className="modal-body">
-                      <form onSubmit={this.updateClasses}>
-                          <input type="text" id="id" name="id" placeholder="Enter the id.."ref={(input) => this.updateId = input}/>
-                          <input type="text" id="ename" name="name" placeholder="New name.." ref={(input) => this.updateDescription = input}/>
-                          <input type="submit" value="Submit" />
-                      </form>
-                  </div>
-                  <div className="modal-footer">
-                      <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
 
         <button type="button" className="btn btn-default" onClick={this.props.logout}>
         <span className="glyphicon glyphicon-log-out"></span>Logout</button>
@@ -137,26 +112,43 @@ class Classes extends React.Component {
            <th>description</th>
            <th>actions</th>
          </tr>
-        { this.props.classesArray.map(function(classesObject) {
+        { this.props.classesArray.map((classesObject, index) => { if(this.props.raw === index){ this.updatedClassObject = context.classesArray[index]} return(
 
-            return(<tr>
+            <tr>
                    <td>{classesObject.name}</td>
                    <td>{classesObject.description}</td>
                    <td>
-                   <button onClick = {()=>{
-                               context.deleteClasses(classesObject.id);
-                               context.getClasses()}}>
-                      Delete
-                    </button>
-                     <button >
-                       Edit
-                     </button>
-                   </td>
-               </tr>
-        )})
-
-      }
+                   <button className="white" onClick={ ()=>{ context.rawDetecor(index); context.isModalOpen('second'); }}> Delete
+                   </button>
+                   <button className="gray" onClick={ ()=> { context.rawDetecor(index); context.isModalOpen('first'); }}> Edit
+                   </button>
+               </td>
+           </tr>
+           )}) }
         </table>
+        <Modal show={this.props.showModal==='first' } handleClose={()=>{this.props.isModalOpen()}}>
+            <div className="modal-body">
+                <form>
+                    <input type="text" id="afname" name="name" defaultValue={this.updatedClassObject.name} onChange={ e=> {this.updatedClassObject.name=e.target.value;}} />
+                    <input type="text" id="adescr" name="description" defaultValue={this.updatedClassObject.description} onChange={ e=> this.updatedClassObject.description=e.target.value}/>
+
+                    <div className="button-question">
+                      <button className = "actions" onClick={ (e)=>{this.updateClasses(e); this.props.isModalOpen()}}> edit </button>
+                      <button className = "actions" onClick={this.props.isModalOpen}>close</button>
+                    </div>
+                </form>
+            </div>
+        </Modal>
+        <Modal show={this.props.showModal==='second' } handleClose={()=>{this.props.isModalOpen(false)}}>
+
+            <div className="modal-body">
+                <p className = "warning">Are you sure you want to permanently delete it? </p>
+                <div className="button-question">
+                  <button className = "actions" onClick={()=> {context.deleteClasses(this.props.classesArray[this.props.raw].id); context.getClasses(); this.props.isModalOpen()}}>{"yeah, I don't care"}</button>
+                  <button className = "actions" onClick={this.props.isModalOpen}>nope</button>
+                </div>
+            </div>
+        </Modal>
       </div>
     )
   }
@@ -164,8 +156,10 @@ class Classes extends React.Component {
 function mapStateToProps(state) {
 
     return {
-      classesArray: state.getClassesArray.classesArray
+      classesArray: state.getClassesArray.classesArray,
+      showModal: state.isModalOpen.showModal,
+      raw: state.getTeachersArray.raw
     };
 }
 
-export default connect(mapStateToProps, {logout, getClasses, deleteClasses, addClasses, updateClasses})(Classes);
+export default connect(mapStateToProps, {logout,rawDetecor,isModalOpen, getClasses, deleteClasses, addClasses, updateClasses})(Classes);

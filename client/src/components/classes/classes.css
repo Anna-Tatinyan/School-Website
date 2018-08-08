@@ -2,7 +2,7 @@
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
-    margin: 10% 30% 0 -60%;
+    margin: 10% 20% 0 -40%;
 }
 
 .classes td, .classes th {
@@ -36,7 +36,7 @@
   flex-direction: row
 }
 .btn-info {
-  margin: 40px 0 0 75%;
+  margin: 10% 10px 0 42%;
 }
 
 input[type=text], select {

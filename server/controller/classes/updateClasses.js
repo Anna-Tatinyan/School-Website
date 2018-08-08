@@ -5,14 +5,15 @@ const op = sequelize.Op;
 
 exports.updateClasses = function(req,res){
 
-  Classes.update(
-    {description: req.body.description},
-  {where: {
-    [op.or]: [
-      { id : req.body.id},
-    ]
-  }
-})
+  Classes.update({
+      name: req.body.name,
+      description: req.body.description,
+    
+    }, {
+      where: {
+        id: req.param('id')
+      }
+    })
   .then((classes) => {
     res.send({
       "code":200,

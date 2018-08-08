@@ -5,7 +5,7 @@ export function deleteStudent(id) {
 
   return dispatch =>
 
-    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/admin/students`, {
+    fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/admin/students/${id}`, {
       method: 'delete',
       headers: {
         'Accept': 'application/json',

@@ -4,11 +4,12 @@ const express = require('express');
 
 
 exports.addClasses = function(req,res){
-  const {name, description} = req.body;
+  const {name, description, teacher} = req.body;
 
   Classes.create({
     name: name,
-    description: description
+    description: description,
+    teacherId: teacher
   })
   .then((classes) => {
     res.send({

@@ -9,10 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
+        allowNull: false,
         type: Sequelize.STRING
       },
-      description: {
-        type: Sequelize.TEXT
+
+      teacherId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Teachers',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
       },
       createdAt: {
         allowNull: false,

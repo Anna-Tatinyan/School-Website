@@ -3,7 +3,7 @@ import "./teachers.css"
 import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import  history  from '../../history';
-import { logout, getTeachers, deleteTeacher, addTeacher, updateTeacher, rawDetecor, isModalOpen} from '../../actions/';
+import { logout, getTeachers, deleteTeacher, addTeacher, updateTeacher, rowDetector, isModalOpen} from '../../actions/';
 import SideNav, { Nav, NavIcon, NavText } from 'react-sidenav';
 import SvgIcon from 'react-icons-kit';
 import {user} from 'react-icons-kit/ikons/user';
@@ -21,8 +21,6 @@ class Teachers extends React.Component {
     this.updatedTeacherObject = {
       firstName: null,
       lastName: null,
-      age: null,
-      gender: null,
       phone: null,
       email: null
     }
@@ -30,12 +28,10 @@ class Teachers extends React.Component {
     addTeacher = (e) => {
           const firstName = this.addFirstName.value;
           const lastName = this.addlastName.value;
-          const age = this.addAge.value
-          const gender = this.addGender.value;
           const phone = this.addPhone.value;
           const email = this.addEmail.value;
 
-          this.props.addTeacher(firstName,lastName,age,gender,phone,email);
+          this.props.addTeacher(firstName,lastName,phone,email);
           this.props.getTeachers();
       };
 
@@ -108,8 +104,6 @@ class Teachers extends React.Component {
                               <input type="text" id="alname" name="alastname" placeholder="Last name.." ref={(input)=> this.addlastName = input}/>
                               <input type="text" id="aemail" name="aemail" placeholder="Email.." ref={(input)=> this.addEmail = input}/>
                               <input type="text" id="plname" name="aphone" placeholder="Phone.." ref={(input)=> this.addPhone = input}/>
-                              <input type="text" id="alname" name="aage" placeholder="Age.." ref={(input)=> this.addAge = input}/>
-                              <input type="text" id="glname" name="agender" placeholder="Gender.." ref={(input)=> this.addGender = input}/>
                               <input className="submit" type="submit" value="Submit" />
                           </form>
                       </div>
@@ -126,24 +120,20 @@ class Teachers extends React.Component {
           <tr className="header">
               <th>firstname</th>
               <th>lastname</th>
-              <th>gender</th>
               <th>phone</th>
               <th>email</th>
-              <th>age</th>
               <th>options</th>
           </tr>
-          { this.props.teachersArray.map((teacherObject, index) => { if(this.props.raw === index){ this.updatedTeacherObject = context.teachersArray[index]; } return(
+          { this.props.teachersArray.map((teacherObject, index) => { if(this.props.row === index){ this.updatedTeacherObject = context.teachersArray[index]; } return(
           <tr>
               <td>{teacherObject.firstName}</td>
               <td>{teacherObject.lastName}</td>
-              <td>{teacherObject.gender}</td>
               <td>{teacherObject.phone}</td>
               <td>{teacherObject.email}</td>
-              <td>{teacherObject.age}</td>
               <td>
-                  <button className="white" onClick={ ()=>{ context.rawDetecor(index); context.isModalOpen('second'); }}> Delete
+                  <button className="white" onClick={ ()=>{ context.rowDetector(index); context.isModalOpen('second'); }}> Delete
                   </button>
-                  <button className="gray" onClick={ ()=> { context.rawDetecor(index); context.isModalOpen('first'); }}> Edit
+                  <button className="gray" onClick={ ()=> { context.rowDetector(index); context.isModalOpen('first'); }}> Edit
                   </button>
               </td>
           </tr>
@@ -156,9 +146,7 @@ class Teachers extends React.Component {
                   <input type="text" id="alname" name="lastname" defaultValue={this.updatedTeacherObject.lastName} onChange={ e=> this.updatedTeacherObject.lastName=e.target.value}/>
                   <input type="text" id="aemail" name="email" defaultValue={this.updatedTeacherObject.email} onChange={ e=> this.updatedTeacherObject.lastName=e.target.value}/>
                   <input type="text" id="plname" name="phone" defaultValue={this.updatedTeacherObject.phone} onChange={ e=> this.updatedTeacherObject.phone=e.target.value}/>
-                  <input type="text" id="alname" name="age" defaultValue={this.updatedTeacherObject.age} onChange={ e=> this.updatedTeacherObject.age=e.target.value}/>
-                  <input type="text" id="glname" name="gender" defaultValue={this.updatedTeacherObject.gender} onChange={ e=> this.updatedTeacherObject.gender=e.target.value}/>
-                  <div className="button-question">
+                    <div className="button-question">
                     <button className = "actions" onClick={ (e)=>{this.updateTeacher(e); this.props.isModalOpen()}}> edit </button>
                     <button className = "actions" onClick={this.props.isModalOpen}>close</button>
                   </div>
@@ -170,7 +158,7 @@ class Teachers extends React.Component {
           <div className="modal-body">
               <p className = "warning">Are you sure you want to permanently delete it? </p>
               <div className="button-question">
-                <button className = "actions" onClick={()=> {context.deleteTeacher(this.props.teachersArray[this.props.raw].id); context.getTeachers(); this.props.isModalOpen()}}>{"yeah, I don't care"}</button>
+                <button className = "actions" onClick={()=> {context.deleteTeacher(this.props.teachersArray[this.props.row].id); context.getTeachers(); this.props.isModalOpen()}}>{"yeah, I don't care"}</button>
                 <button className = "actions" onClick={this.props.isModalOpen}>nope</button>
               </div>
           </div>
@@ -186,8 +174,8 @@ function mapStateToProps(state) {
     return {
       teachersArray: state.getTeachersArray.teachersArray,
       showModal: state.isModalOpen.showModal,
-      raw: state.getTeachersArray.raw
+      row: state.rowDetector.row
     };
 }
 
-export default connect(mapStateToProps, {logout, getTeachers, deleteTeacher, rawDetecor, addTeacher, updateTeacher, isModalOpen})(Teachers);
+export default connect(mapStateToProps, {logout, getTeachers, deleteTeacher, rowDetector, addTeacher, updateTeacher, isModalOpen})(Teachers);

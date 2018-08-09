@@ -17,3 +17,4 @@ export * from "./classes/addClasses";
 export * from "./classes/updateClasses";
 
 export * from "./isModalOpen";
+export * from "./rowDetector"

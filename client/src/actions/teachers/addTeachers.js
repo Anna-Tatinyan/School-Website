@@ -1,7 +1,7 @@
 import actionConstant  from '../../constants/actionConstant';
 import fetch from "isomorphic-fetch";
 
-export function addTeacher(firstName,lastName,age,gender,phone,email) {
+export function addTeacher(firstName,lastName,phone,email) {
 
   return dispatch =>
 
@@ -15,9 +15,7 @@ export function addTeacher(firstName,lastName,age,gender,phone,email) {
         "firstName": firstName,
         "lastName": lastName,
         "email": email,
-        "age": age,
-        "phone": phone,
-        "gender": gender
+        "phone": phone
       }),
     })
 

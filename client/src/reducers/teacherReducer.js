@@ -3,10 +3,10 @@ import actionConstant from "../constants/actionConstant";
 import history from "../history";
 const initialState = {
 
-  teachersArray: [],
-  editing: false,
- isModalOpened: false,
- raw: null
+   teachersArray: [],
+   editing: false,
+   isModalOpened: false,
+   raw: null
 
 };
 
@@ -24,14 +24,6 @@ export function getTeachersArray(state = initialState, action) {
             });
           }
 
-
-    case actionConstant.RAW_DETECT:{
-     return{
-       ...state,
-       raw: action.id,
-
-     };
-   }
 
         break;
         default:

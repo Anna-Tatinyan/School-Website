@@ -13,7 +13,7 @@ export function updateClasses(input) {
       },
       body: JSON.stringify({
         "id": input.id,
-        "description": input.description
+        "name": input.name,
 
       }),
     })

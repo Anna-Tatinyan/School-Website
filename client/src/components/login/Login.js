@@ -29,13 +29,11 @@ class Login extends React.Component {
     }
 
    onChangeEmail(e) {
-    setTimeout(() => {
-        this.props.setEmail(e)}, 0)
+        this.props.setEmail(e)
    }
 
   onChangePassword(e) {
-   setTimeout(() => {
-       this.props.setPassword(e)}, 0)
+       this.props.setPassword(e)
 
   }
     render() {

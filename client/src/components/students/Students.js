@@ -3,7 +3,7 @@ import "./students.css"
 import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import  history  from '../../history';
-import { logout, getStudents, isModalOpen, rawDetecor, deleteStudent, addStudent, updateStudent  } from '../../actions/';
+import { logout, getStudents, isModalOpen, rowDetector, deleteStudent, addStudent, updateStudent  } from '../../actions/';
 import SideNav, { Nav, NavIcon, NavText } from 'react-sidenav';
 import SvgIcon from 'react-icons-kit';
 import {user} from 'react-icons-kit/ikons/user';
@@ -132,7 +132,7 @@ class Students extends React.Component {
          <th>age</th>
          <th>options</th>
        </tr>
-      { this.props.studentsArray.map((studentsObject, index) => {  if(this.props.raw === index){ this.updatedStudentObject = this.props.studentsArray[index]} return(
+      { this.props.studentsArray.map((studentsObject, index) => {  if(this.props.row === index){ this.updatedStudentObject = this.props.studentsArray[index]} return(
 
           <tr>
                  <td>{studentsObject.firstName}</td>
@@ -142,9 +142,9 @@ class Students extends React.Component {
                   <td>{studentsObject.email}</td>
                   <td>{studentsObject.age}</td>
                  <td>
-                 <button className="white" onClick={ ()=>{ context.rawDetecor(index); context.isModalOpen('second'); }}> Delete
+                 <button className="white" onClick={ ()=>{ context.rowDetector(index); context.isModalOpen('second'); }}> Delete
                  </button>
-                 <button className="gray" onClick={ ()=> { context.rawDetecor(index); context.isModalOpen('first'); }}> Edit
+                 <button className="gray" onClick={ ()=> { context.rowDetector(index); context.isModalOpen('first'); }}> Edit
                  </button>
                  </td>
              </tr>
@@ -172,7 +172,7 @@ class Students extends React.Component {
           <div className="modal-body">
               <p className = "warning">Are you sure you want to permanently delete it? </p>
               <div className="button-question">
-                <button className = "actions" onClick={()=> {context.deleteStudent(this.props.studentsArray[this.props.raw].id); context.getStudents(); this.props.isModalOpen()}}>{"yeah, I don't care"}</button>
+                <button className = "actions" onClick={()=> {context.deleteStudent(this.props.studentsArray[this.props.row].id); context.getStudents(); this.props.isModalOpen()}}>{"yeah, I don't care"}</button>
                 <button className = "actions" onClick={this.props.isModalOpen}>nope</button>
               </div>
           </div>
@@ -186,8 +186,8 @@ function mapStateToProps(state) {
     return {
       studentsArray: state.getStudentsArray.studentsArray,
       showModal: state.isModalOpen.showModal,
-      raw: state.getTeachersArray.raw
+      row: state.rowDetector.row
     };
 }
 
-export default connect(mapStateToProps, {logout, rawDetecor, getStudents, deleteStudent, isModalOpen, addStudent, updateStudent})(Students);
+export default connect(mapStateToProps, {logout, rowDetector, getStudents, deleteStudent, isModalOpen, addStudent, updateStudent})(Students);

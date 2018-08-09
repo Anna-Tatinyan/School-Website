@@ -7,9 +7,7 @@ exports.updateTeachers = function(req,res){
   Teachers.update(
     {
     firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    age: req.body.age,
-    gender: req.body.gender,
+    lastName: req.body.lastName,  
     phone: req.body.phone,
     email: req.body.email},
   {where: {

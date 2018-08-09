@@ -14,8 +14,6 @@ export function updateTeacher(input) {
       body: JSON.stringify({
         'firstName': input.firstName,
        'lastName': input.lastName,
-       'age': input.age,
-       'gender': input.gender,
        'phone': input.phone,
        'email': input.email,
 
@@ -23,11 +21,3 @@ export function updateTeacher(input) {
     })
     .catch(error => { console.log('request failed', error); });
 }
-
-
-  export function rawDetecor(id){
-    return {
-      type: actionConstant.RAW_DETECT,
-      id
-    }
-  }

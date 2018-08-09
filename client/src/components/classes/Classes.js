@@ -4,7 +4,7 @@ import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import  history  from '../../history';
-import { logout, rawDetecor,isModalOpen, getClasses, deleteClasses, addClasses, updateClasses  } from '../../actions/';
+import { logout, rowDetector,isModalOpen, getClasses, deleteClasses, addClasses, updateClasses  } from '../../actions/';
 
 import SideNav, { Nav, NavIcon, NavText } from 'react-sidenav';
 import SvgIcon from 'react-icons-kit';
@@ -21,20 +21,15 @@ class Classes extends React.Component {
   super(props);
 
   this.updatedClassObject = {
-    firstName: null,
-    lastName: null,
-    age: null,
-    gender: null,
-    phone: null,
-    email: null
+    name: null,
+    teacherId: null
   }
 }
   addClasses = (e) => {
         const name = this.addName.value;
-        const description = this.addDescription.value;
 
 
-        this.props.addClasses(name, description);
+        this.props.addClasses(name);
         this.props.getClasses();
     };
 
@@ -91,7 +86,6 @@ class Classes extends React.Component {
                   <div className="modal-body">
                       <form  onSubmit={this.addClasses}>
                           <input type="text" id="aname" name="name" placeholder="Name of the class.." ref={(input) => this.addName = input}/>
-                          <input type="text" id="aname" name="description" placeholder="Description.." ref={(input) => this.addDescription = input}/>
 
                           <input className="submit" type="submit" value="Submit" />
                       </form>
@@ -109,18 +103,18 @@ class Classes extends React.Component {
         <table className="classes">
         <tr>
            <th>name</th>
-           <th>description</th>
+           <th>teacher</th>
            <th>actions</th>
          </tr>
-        { this.props.classesArray.map((classesObject, index) => { if(this.props.raw === index){ this.updatedClassObject = context.classesArray[index]} return(
+        { this.props.classesArray.map((classesObject, index) => { if(this.props.row === index){ this.updatedClassObject = context.classesArray[index]} return(
 
             <tr>
                    <td>{classesObject.name}</td>
-                   <td>{classesObject.description}</td>
+                   <td>{classesObject.teacherId}</td>
                    <td>
-                   <button className="white" onClick={ ()=>{ context.rawDetecor(index); context.isModalOpen('second'); }}> Delete
+                   <button className="white" onClick={ ()=>{ context.rowDetector(index); context.isModalOpen('second'); }}> Delete
                    </button>
-                   <button className="gray" onClick={ ()=> { context.rawDetecor(index); context.isModalOpen('first'); }}> Edit
+                   <button className="gray" onClick={ ()=> { context.rowDetector(index); context.isModalOpen('first'); }}> Edit
                    </button>
                </td>
            </tr>
@@ -130,7 +124,6 @@ class Classes extends React.Component {
             <div className="modal-body">
                 <form>
                     <input type="text" id="afname" name="name" defaultValue={this.updatedClassObject.name} onChange={ e=> {this.updatedClassObject.name=e.target.value;}} />
-                    <input type="text" id="adescr" name="description" defaultValue={this.updatedClassObject.description} onChange={ e=> this.updatedClassObject.description=e.target.value}/>
 
                     <div className="button-question">
                       <button className = "actions" onClick={ (e)=>{this.updateClasses(e); this.props.isModalOpen()}}> edit </button>
@@ -144,7 +137,7 @@ class Classes extends React.Component {
             <div className="modal-body">
                 <p className = "warning">Are you sure you want to permanently delete it? </p>
                 <div className="button-question">
-                  <button className = "actions" onClick={()=> {context.deleteClasses(this.props.classesArray[this.props.raw].id); context.getClasses(); this.props.isModalOpen()}}>{"yeah, I don't care"}</button>
+                  <button className = "actions" onClick={()=> {context.deleteClasses(this.props.classesArray[this.props.row].id); context.getClasses(); this.props.isModalOpen()}}>{"yeah, I don't care"}</button>
                   <button className = "actions" onClick={this.props.isModalOpen}>nope</button>
                 </div>
             </div>
@@ -158,8 +151,8 @@ function mapStateToProps(state) {
     return {
       classesArray: state.getClassesArray.classesArray,
       showModal: state.isModalOpen.showModal,
-      raw: state.getTeachersArray.raw
+      row: state.rowDetector.row
     };
 }
 
-export default connect(mapStateToProps, {logout,rawDetecor,isModalOpen, getClasses, deleteClasses, addClasses, updateClasses})(Classes);
+export default connect(mapStateToProps, {logout,rowDetector,isModalOpen, getClasses, deleteClasses, addClasses, updateClasses})(Classes);

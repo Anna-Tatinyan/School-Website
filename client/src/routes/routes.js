@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route, IndexRoute, Switch } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import App from '../container/App.js';
+
 import LoginPage from '../components/login/Login.js';
 import Home from '../components/home/Home.js';
 import Error from '../components/error/Error.js';

@@ -6,9 +6,8 @@ const op = sequelize.Op;
 exports.updateClasses = function(req,res){
 
   Classes.update({
-      name: req.body.name,
-      description: req.body.description,
-    
+      name: req.body.name
+
     }, {
       where: {
         id: req.param('id')

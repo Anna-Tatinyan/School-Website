@@ -9,8 +9,6 @@ exports.addTeacher = function(req,res){
   Teachers.create({
     firstName: firstName,
     lastName: lastName,
-    age: age,
-    gender: gender,
     phone: phone,
     email: email
   })

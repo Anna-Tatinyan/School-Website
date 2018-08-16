@@ -1,31 +1,18 @@
 .btn-default {
-
-    position:fixed;
-     right:10px;
-     top:5px;
-
+  position: fixed;
+  right: 10px;
+  top: 5px;
 }
+
 .head {
   color: #090E54;
   text-align: center;
-  margin: 0 0 0 0;
-}
-.background-image{
-  margin: 30px 100px 0 21%;
-  width: 800px
+  margin: 0 0 50px 0;
 }
 
-.descr {
-  margin: 30px 50px 0 0;
-}
-.content {
-  display: flex;
-  flex-direction: row
-}
 .main {
   display: flex;
   flex-direction: row
-
 }
 
 .hblxMG {

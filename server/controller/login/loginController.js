@@ -3,6 +3,7 @@ const sequelize = require('sequelize');
 const express = require('express');
 const create = require('./tokenCreator.js');
 require('dotenv').config();
+const bcrypt = require('bcrypt')
 
 exports.login = function(req,res){
   const email= req.body.email;
@@ -18,7 +19,7 @@ exports.login = function(req,res){
     }
     else{
       if(Object.keys(results).length > 0)  {
-        if(results.password == password){
+        if(bcrypt.compareSync(password, results.password)){
           const token = create.generateToken(results);
 
           res.status(200).send({

@@ -3,11 +3,7 @@ import actionConstant from "../constants/actionConstant";
 import history from "../history";
 const initialState = {
 
-   teachersArray: [],
-   editing: false,
-   isModalOpened: false,
-   raw: null
-
+   teachersArray: []
 };
 
 export function getTeachersArray(state = initialState, action) {

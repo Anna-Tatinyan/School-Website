@@ -19,7 +19,7 @@ class Home extends React.Component {
 
 
             </header>
-            <img src={students}/>
+            <img alt = "students" src={students}/>
           </div>
     )
   }

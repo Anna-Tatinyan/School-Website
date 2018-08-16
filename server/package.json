@@ -10,12 +10,15 @@
   "author": "Anna Tatinyan",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "express-jwt": "^5.3.1",
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.3.0",
     "mysql2": "^1.5.3",
-    "react-router-redux": "^5.0.0-alpha.9",
     "sequelize": "^4.38.0",
     "sequelize-cli": "^4.0.0",
     "validator": "^10.4.0"

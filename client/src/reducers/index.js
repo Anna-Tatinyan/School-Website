@@ -5,17 +5,17 @@ import  {userStatus} from './statusReducer';
 import {getStudentsArray} from './studentReducer';
 import {getTeachersArray} from './teacherReducer';
 import {getClassesArray} from "./classesReducer";
-import {isModalOpen} from "./isModalOpen";
-import {rowDetector} from "./rowDetector";
+import {onSubmitReducer} from "./onSubmitReducer"
+import {getAvailableTeachers} from './getAvailableTeachers'
 
 const mainReducer = combineReducers({
   userLogin,
   userStatus,
   getStudentsArray,
-  rowDetector,
   getTeachersArray,
   getClassesArray,
-  isModalOpen
+  onSubmitReducer,
+  getAvailableTeachers
 });
 
 export default mainReducer;

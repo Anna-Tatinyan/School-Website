@@ -13,7 +13,7 @@ export function getStudentsArray(state = initialState, action) {
 
 
       case actionConstant.GET_STUDENT: {
-
+      
             return Object.assign({}, state, {
               ...state,
 
@@ -21,8 +21,7 @@ export function getStudentsArray(state = initialState, action) {
             });
           }
 
-        break;
-        default:
-          return state;
-    }
-  }
+     default:
+       return state;
+   }
+ }

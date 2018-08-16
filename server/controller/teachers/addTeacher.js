@@ -4,7 +4,7 @@ const express = require('express');
 
 
 exports.addTeacher = function(req,res){
-  const {firstName, lastName, age, gender, phone, email} = req.body;
+  const {firstName, lastName,  phone, email} = req.body;
 
   Teachers.create({
     firstName: firstName,
@@ -14,6 +14,8 @@ exports.addTeacher = function(req,res){
   })
   .then((teachers) => {
     res.send({
+
+      "id": teachers.dataValues.id,
       "code":200,
       "message": "Teacher was created"
     });

@@ -1,4 +1,4 @@
-import React, { Component}  from 'react';
+import React from 'react';
 
 const Modal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? "modal display-block" : "modal display-none";
@@ -6,7 +6,7 @@ const Modal = ({ handleClose, show, children }) => {
     <div className={showHideClassName}>
       <section className="modal-main">
         {children}
-        
+
       </section>
     </div>
   );

@@ -11,4 +11,7 @@ export default class actionConstant {
     static GET_CLASS = "GET_CLASS";
     static IS_MODAL_OPEN = "IS_MODAL_OPEN";
     static RAW_DETECT = "RAW_DETECT"
-};
+    static NEW_ADDED_ID = "NEW_ADDED_ID"
+    static RESET_ID= "RESET_ID"
+    static GET_AVAILABLE_TEACHERS = 'GET_AVAILABLE_TEACHERS'
+    static GET_AVAILABLE_CLASSES = 'GET_AVAILABLE_CLASSES'};

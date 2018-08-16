@@ -2,17 +2,25 @@ import React from 'react';
 import { Router, Route, IndexRoute, Switch } from 'react-router';
 import { Redirect } from 'react-router-dom';
 
-import LoginPage from '../components/login/Login.js';
+import Login from '../containers/login/Login.js';
 import Home from '../components/home/Home.js';
 import Error from '../components/error/Error.js';
 import history from '../history';
 import Admin from "../components/admin/Admin";
 import { PrivateRoute } from './privateRoute';
-import Classes from '../components/classes/Classes';
-import Students from '../components/students/Students';
-import Teachers from '../components/teachers/Teachers';
+
+import Classes from '../containers/classes/classesList/ClassesListContainer';
+import AddClasses from "../containers/classes/addClasses/AddClassesContainer";
+import EditClasses from "../containers/classes/editClasses/EditClassesContainer";
 
 
+import Students from '../containers/students/studentList/StudentListContainer';
+import AddStudents from "../containers/students/addStudent/AddStudentContainer";
+import EditStudents from "../containers/students/editStudent/EditStudentContainer"
+
+import Teachers from '../containers/teachers/teacherList/TeacherListContainer';
+import AddTeachers from "../containers/teachers/addTeacher/AddTeacherContainer";
+import EditTeachers from "../containers/teachers/editTeacher/EditTeacherContainer";
 
 
 export default class Routy extends React.Component{
@@ -23,12 +31,22 @@ export default class Routy extends React.Component{
           <Route exact path="/" component={Home} />
           <PrivateRoute exact path="/admin" component={Admin} />
           <Route  path="/login" render={() => (
-              localStorage.getItem('user') ? (<Redirect to={"/admin"}/>) : (<LoginPage/>))}/>
+              localStorage.getItem('user') ? (<Redirect to={"/admin"}/>) : (<Login/>))}/>
 
-          <Route exact path="/admin/teachers" component={Teachers} />
-          <Route exact path="/admin/classes" component={Classes} />
-          <Route exact path="/admin/students" component={Students} />
-          <Route component={Error} />
+          <PrivateRoute exact path="/admin/teachers" component={Teachers} />
+          <PrivateRoute exact path="/admin/classes" component={Classes} />
+          <PrivateRoute exact path="/admin/students" component={Students} />
+
+          <PrivateRoute exact path="/admin/students/add" component={AddStudents} />
+          <PrivateRoute exact path="/admin/students/edit/:id" component={EditStudents} />
+
+
+          <PrivateRoute exact path="/admin/teachers/add" component={AddTeachers} />
+          <PrivateRoute exact path="/admin/teachers/edit/:id" component={EditTeachers} />
+
+          <PrivateRoute exact path="/admin/classes/add" component={AddClasses} />
+          <PrivateRoute exact path="/admin/classes/edit/:id" component={EditClasses} />
+          <PrivateRoute component={Error} />
 
            //nav items and route will automatically updated upon selection
 

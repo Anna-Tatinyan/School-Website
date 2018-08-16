@@ -10,7 +10,7 @@ class Error extends Component {
       <h3 className="errorBottom">This page is not found</h3>
     </div>
       <div>
-      <img className="gif" src={gif}/>
+      <img alt="gif" className="gif" src={gif}/>
       </div>
 
      </div>

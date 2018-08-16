@@ -5,8 +5,10 @@ import  {userStatus} from './statusReducer';
 import {getStudentsArray} from './studentReducer';
 import {getTeachersArray} from './teacherReducer';
 import {getClassesArray} from "./classesReducer";
-import {onSubmitReducer} from "./onSubmitReducer"
-import {getAvailableTeachers} from './getAvailableTeachers'
+import {onSubmitReducer} from "./onSubmitReducer";
+import {getAvailableTeachers} from './getAvailableTeachers';
+
+import {getCoursesArray} from './coursesReducer'
 
 const mainReducer = combineReducers({
   userLogin,
@@ -15,7 +17,8 @@ const mainReducer = combineReducers({
   getTeachersArray,
   getClassesArray,
   onSubmitReducer,
-  getAvailableTeachers
+  getAvailableTeachers,
+  getCoursesArray
 });
 
 export default mainReducer;

@@ -7,6 +7,8 @@ import {user} from 'react-icons-kit/ikons/user';
 import {book} from 'react-icons-kit/oct/book';
 import {university} from 'react-icons-kit/ionicons/university';
 import {home} from 'react-icons-kit/iconic/home';
+import {bell} from 'react-icons-kit/icomoon/bell'
+
 import history from "../history";
 import SideNav, {  NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
@@ -55,9 +57,15 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
                                </NavItem>
                                <NavItem eventKey="admin/classes">
                                    <NavIcon>
-                                       <SvgIcon className="icon" size={20} icon={book}/>
+                                       <SvgIcon className="icon" size={20} icon={bell}/>
                                    </NavIcon>
                                    <NavText className="text"> Classes </NavText>
+                               </NavItem>
+                               <NavItem eventKey="admin/courses">
+                                   <NavIcon>
+                                       <SvgIcon className="icon" size={20} icon={book}/>
+                                   </NavIcon>
+                                   <NavText className="text"> Courses </NavText>
                                </NavItem>
                                <NavItem eventKey="admin/teachers">
                                    <NavIcon>

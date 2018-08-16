@@ -8,21 +8,14 @@ import {
 } from "../fetchAction"
 
 
-export function getClassesArray(classesArray) {
-
-  return {
-    classesArray,
-    type: actionConstant.GET_CLASS
-  };
-}
-export function getClasses() {
+export function getCourses() {
   return dispatch =>
 
 
-    dispatch(generalFetch('admin/classes', 'GET'))
+    dispatch(generalFetch('admin/courses', 'GET'))
 
     .then(response => {
-      dispatch(getClassesArray(response));
+      dispatch(getCoursesArray(response));
 
     })
 
@@ -30,19 +23,22 @@ export function getClasses() {
       console.log('request failed', error);
     });
 }
-export function addClasses(input) {
+export function addCourses(input) {
 
   const addBody = {
     "name": input.name,
-    "teacherId": input.teacherId
+    "teacherId": input.teacherId,
+    "classId": input.classId,
+    "startDate": input.startDate,
+    "endDate": input.endDate
   }
-
+  console.log(input);
   return dispatch =>
 
-    dispatch(generalFetch('admin/classes', 'post', addBody))
+    dispatch(generalFetch('admin/courses', 'post', addBody))
     .then((result) => {
       dispatch(setNewId(result.id));
-      return dispatch(getClasses())
+      return dispatch(getCourses())
     })
 
     .catch(error => {
@@ -51,18 +47,18 @@ export function addClasses(input) {
 }
 
 
-export function deleteClasses(id) {
+export function deleteCourses(id) {
 
   const deleteBody = {
     "id": id
   }
   return dispatch =>
 
-    dispatch(generalFetch(`admin/classes/${id}`, 'delete', deleteBody))
+    dispatch(generalFetch(`admin/courses/${id}`, 'delete', deleteBody))
 
 
     .then(result => {
-      return dispatch(getClasses())
+      return dispatch(getCourses())
     })
 
     .catch(error => {
@@ -83,7 +79,7 @@ export function getAvailableTeachersArray(availableTeachersArray) {
 export function getAvailableTeachers() {
   return dispatch =>
 
-    dispatch(generalFetch('admin/classes/availaBleTeachers', "GET"))
+    dispatch(generalFetch('admin/courses/availaBleTeachers', "GET"))
 
     .then(teacherArray => {
       dispatch(getAvailableTeachersArray(teacherArray));
@@ -96,21 +92,31 @@ export function getAvailableTeachers() {
 }
 
 
+export function getCoursesArray(coursesArray) {
+
+  return {
+    coursesArray,
+    type: actionConstant.GET_COURSE
+  };
+}
 
 
 
-export function updateClasses(input) {
+export function updateCourses(input) {
+  console.log(input)
   const updateBody = {
-    "id": input.id,
     "name": input.name,
-    'teacherId': input.teacherId
+    "teacherId": input.teacherId,
+    "classId": input.classId,
+    "startDate": input.startDate,
+    "endDate": input.endDate
 
   }
   return dispatch => {
 
-    dispatch(generalFetch(`admin/classes/${input.id}`, "put", updateBody))
+    dispatch(generalFetch(`admin/courses/${input.id}`, "put", updateBody))
       .then(result => {
-        return dispatch(getClasses())
+        return dispatch(getCourses())
       })
       .catch(error => {
         console.log('request failed', error);

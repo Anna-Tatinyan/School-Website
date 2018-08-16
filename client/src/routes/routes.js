@@ -13,6 +13,10 @@ import Classes from '../containers/classes/classesList/ClassesListContainer';
 import AddClasses from "../containers/classes/addClasses/AddClassesContainer";
 import EditClasses from "../containers/classes/editClasses/EditClassesContainer";
 
+import Courses from '../containers/courses/coursesList/CoursesListContainer';
+import AddCourses from "../containers/courses/addCourses/AddCoursesContainer";
+import EditCourses from "../containers/courses/editCourses/EditCoursesContainer";
+
 
 import Students from '../containers/students/studentList/StudentListContainer';
 import AddStudents from "../containers/students/addStudent/AddStudentContainer";
@@ -36,6 +40,11 @@ export default class Routy extends React.Component{
           <PrivateRoute exact path="/admin/teachers" component={Teachers} />
           <PrivateRoute exact path="/admin/classes" component={Classes} />
           <PrivateRoute exact path="/admin/students" component={Students} />
+          <PrivateRoute exact path="/admin/courses" component={Courses} />
+
+          <PrivateRoute exact path="/admin/courses/add" component={AddCourses} />
+          <PrivateRoute exact path="/admin/courses/edit/:id" component={EditCourses} />
+
 
           <PrivateRoute exact path="/admin/students/add" component={AddStudents} />
           <PrivateRoute exact path="/admin/students/edit/:id" component={EditStudents} />
@@ -46,7 +55,7 @@ export default class Routy extends React.Component{
 
           <PrivateRoute exact path="/admin/classes/add" component={AddClasses} />
           <PrivateRoute exact path="/admin/classes/edit/:id" component={EditClasses} />
-          <PrivateRoute component={Error} />
+          <Route component={Error} />
 
            //nav items and route will automatically updated upon selection
 

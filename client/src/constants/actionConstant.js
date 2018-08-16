@@ -7,6 +7,7 @@ export default class actionConstant {
     static LOGGED_SUCCESSFULLY = "LOGGED_SUCCESSFULLY";
     static LOGOUT = "LOGOUT";
     static GET_STUDENT = "GET_STUDENT";
+    static GET_COURSE = "GET_COURSE";
     static GET_TEACHER = "GET_TEACHER";
     static GET_CLASS = "GET_CLASS";
     static IS_MODAL_OPEN = "IS_MODAL_OPEN";

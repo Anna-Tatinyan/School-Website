@@ -71,7 +71,7 @@ class ClassesList extends React.Component {
          <th>teacher</th>
          <th>options</th>
        </tr>
-      { this.props.classesArray.map((classesObject, index) => {  if(this.state.row === index){ this.updatedClassesObject = this.props.classesArray[index]} return(
+      { this.props.classesArray  ? this.props.classesArray.map((classesObject, index) => {  if(this.state.row === index){ this.updatedClassesObject = this.props.classesArray[index]} return(
 
           <tr>
 
@@ -86,7 +86,7 @@ class ClassesList extends React.Component {
                  </td>
              </tr>
 
-        )})
+        )} ) : true
     }
       </table>
 

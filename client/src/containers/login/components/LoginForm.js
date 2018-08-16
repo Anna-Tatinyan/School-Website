@@ -2,8 +2,8 @@
 import React from 'react';
 import './login.css';
 import validator from 'validator';
-
-
+import image from "./blur.jpg"
+import logo from "./logo.jpg"
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -22,10 +22,6 @@ class LoginForm extends React.Component {
           let { email, password } = this.state;
           if(this.state.isButtonEnabled) {
             this.props.login(email, password);
-            // this.setState({
-            //   email: '',
-            //   password: ''
-            // });
           }
       }
 
@@ -67,9 +63,9 @@ class LoginForm extends React.Component {
       this.props.error ? requirementStatus = this.props.error.message : requirementStatus= this.state.validationWarning;
         return (
           <React.Fragment>
-  		       <div className="container-login100" style={{backgroundImage: "url(https://i0.wp.com/switchee.co/wp-content/uploads/2014/04/blurred-bg.jpg)"}}>
+  		       <div className="container-login100" style={{backgroundImage: `url(${image})`}}>
   			        <div className="wrap-login100">
-  				          <div className="login100-form-title" style={{backgroundImage: "url(https://www.tbo.com/storyimage/TB/20150515/ARTICLE/150519557/AR/0/AR-150519557.jpg?MaxW=950&cachebuster=499632)"}}>
+  				          <div className="login100-form-title" style={{backgroundImage: `url(${logo})`}}>
   				          </div>
 
               			<form className="login100-form validate-form" onSubmit={this.submitHandler}>
@@ -79,13 +75,13 @@ class LoginForm extends React.Component {
                                 onChange={this.changeHandler} value={email} />
                   						<span className="focus-input100"></span>
                   			</div>
-
-              					<div className="wrap-input100 validate-input m-b-18">
-              						<span className="label-input100">Password</span>
-              						<input className="input100" type="password" name="password" required
+                        <div className="wrap-input100 validate-input m-b-18">
+                          <span className="label-input100">Password</span>
+                          <input className="input100" type="text" name="password" required
                                 onChange={this.changeHandler} value={password} />
-              						<span className="focus-input100"></span>
-              					</div>
+                          <span className="focus-input100"></span>
+                        </div>
+
                           <div className="help-block">{requirementStatus}</div>
               					<div className="flex-sb-m w-full p-b-30">
               						<div className="contact100-form-checkbox">

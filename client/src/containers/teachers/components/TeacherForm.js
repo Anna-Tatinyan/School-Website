@@ -1,11 +1,5 @@
 import React from 'react';
 import "../../students/components/studentForm.css"
-import SideNav, { Nav, NavIcon, NavText } from 'react-sidenav';
-import SvgIcon from 'react-icons-kit';
-import {user} from 'react-icons-kit/ikons/user';
-import {book} from 'react-icons-kit/oct/book';
-import {university} from 'react-icons-kit/ionicons/university';
-import {home} from 'react-icons-kit/iconic/home';
 import Modal from '../../../components/modal.js';
 import history from "../../../history";
 

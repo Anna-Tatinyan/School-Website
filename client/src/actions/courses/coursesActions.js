@@ -42,7 +42,9 @@ export function addCourses(input, shouldEdit) {
         "courseId": result.id,
         "startTime": input.time[0].startTime,
         "endTime": input.time[0].endTime,
-        "weekDay": input.time[0].weekDay
+        "weekDay": input.time[0].weekDay,
+        "classId": input.classId
+
 
       }
       console.log(timeBody)
@@ -136,7 +138,6 @@ export function updateCourses(input) {
     "weekDay": input.time[0].weekDay
 
   }
-  console.log(timeBody)
   return dispatch => {
     //
     dispatch(generalFetch(`admin/courses/${input.id}`, "put", updateBody))

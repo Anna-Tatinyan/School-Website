@@ -67,7 +67,6 @@ class CoursesForm extends React.Component {
           <form className = "add-form">
                   <input ref = 'name' defaultValue={(inputValues) ? inputValues.name :  ''} type="text" id="afname" name="firstname"  placeholder="First name" onChange={ (e)=> {inputValues.name=e.target.value}} />
                   <div className = "error"> {nameError} </div>
-                  {console.log(inputValues)}
                   <input ref = 'startDate' defaultValue={(inputValues) ? inputValues.startDate :  ''} type="date" id="alname" name="lastname"  placeholder="Last name"  onChange={ e=> {inputValues.startDate=e.target.value}}/>
                   <input ref = 'endDate' defaultValue={(inputValues) ? inputValues.endDate :  ''} type="date" id="aemail" name="email"  placeholder="Email" onChange={ e=> {inputValues.endDate=e.target.value}}/>
                   <div className = "error"> {dateError} </div>

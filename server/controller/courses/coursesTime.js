@@ -5,17 +5,22 @@ const express = require('express');
 
 exports.addCoursesTime = function(req,res){
   let allTime = [];
-  const {courseId, weekDay, startTime, endTime} = req.body;
-console.log(req.body)
-    courseTime.findAll()
+  const {courseId, weekDay, startTime, endTime, classId} = req.body;
+
+    console.log(req.body)
+    courseTime.findAll({
+    include: ["Courses"],
+    attributes: ['id', 'courseId', 'weekDay', 'startTime', 'endTime', "classId"],
+    where: {
+     weekDay: weekDay,
+     classId: classId
+    }
+  })
 
     .then(allTime => {
+      console.log(allTime)
      let isValid = true;
      for(let i = 0; i<allTime.length; i++){
-       console.log(allTime[i].endTime)
-       console.log(allTime[i].startTime)
-       console.log(req.body.endTime)
-       console.log(req.body.startTime)
 
           if((allTime[i].endTime <= req.body.startTime || allTime[i].startTime >= req.body.endTime)){
             isValid = false;
@@ -36,7 +41,8 @@ console.log(req.body)
         courseId: courseId,
         weekDay: weekDay,
         startTime: startTime,
-        endTime: endTime
+        endTime: endTime,
+        classId: classId
 
       }).then((course) => {
       res.send({
@@ -59,7 +65,7 @@ console.log(req.body)
 
 exports.updateTime = function(req,res){
     const {courseId, weekDay, startTime, endTime} = req.body;
-console.log(req.body)
+
   courseTime.update({
     weekDay: weekDay,
     startTime: startTime,
@@ -71,7 +77,27 @@ console.log(req.body)
       }
     })
   .then((time) => {
-    console.log(time)
+    if(time[0] === 0) {
+      courseTime.create({
+        courseId: courseId,
+        weekDay: weekDay,
+        startTime: startTime,
+        endTime: endTime
+
+      }).then((course) => {
+      res.send({
+        "code":200,
+        "message": `Course with timetable was added`
+      })
+     }).catch(function(error){
+      res.send({
+        "error": error,
+        "code":400,
+        "message": "error occured while adding a time"
+      });
+    });
+
+    }
     res.send({
       "code":200,
       "message": "time was updated"

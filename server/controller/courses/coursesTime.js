@@ -1,7 +1,7 @@
+
 const {courseTime} = require('../../models/index');
 const sequelize = require('sequelize');
 const express = require('express');
-
 
 exports.addCoursesTime = function(req, res) {
   let allTime = [];
@@ -19,7 +19,6 @@ exports.addCoursesTime = function(req, res) {
     .then(allTime => {
       let isValid = true;
       for (let i = 0; i < allTime.length; i++) {
-
         if ((allTime[i].endTime <= req.body.startTime || allTime[i].startTime >= req.body.endTime)) {
           isValid = false;
           res.send({
@@ -81,8 +80,11 @@ exports.updateTime = function(req, res) {
     .then(allTime => {
       let isValid = true;
       for (let i = 0; i < allTime.length; i++) {
+        if(allTime[i].courseId === req.body.courseId){
+          continue;
+        }
 
-        if ((allTime[i].endTime <= req.body.startTime || allTime[i].startTime >= req.body.endTime)) {
+        if (!(allTime[i].endTime <= req.body.startTime || allTime[i].startTime >= req.body.endTime)) {
           isValid = false;
           res.send({
             "code": 416,
@@ -96,7 +98,6 @@ exports.updateTime = function(req, res) {
         }
       }
       if (isValid) {
-
         courseTime.update({
             weekDay: weekDay,
             startTime: startTime,
@@ -115,19 +116,7 @@ exports.updateTime = function(req, res) {
                 startTime: startTime,
                 endTime: endTime
 
-              }).then((course) => {
-                res.send({
-                  "code": 200,
-                  "message": `Course with timetable was added`
-                })
-              }).catch(function(error) {
-                res.send({
-                  "error": error,
-                  "code": 400,
-                  "message": "error occured while adding a time"
-                });
-              });
-
+              })
             }
             res.send({
               "code": 200,

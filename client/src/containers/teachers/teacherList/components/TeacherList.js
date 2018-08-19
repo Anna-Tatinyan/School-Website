@@ -122,9 +122,10 @@ class TeachersList extends React.Component {
         </Modal>
         { this.props.errorMessage ?
           <SweetAlert
+          style = {{height: "500px"}}
             warning
             showCancel
-            cancelBtnBsStyle=""
+            cancelBtnBsStyle="warning"
             confirmBtnText="Yes I want to change classes"
             confirmBtnBsStyle="danger"
             title="Do you want to go and change classes?"

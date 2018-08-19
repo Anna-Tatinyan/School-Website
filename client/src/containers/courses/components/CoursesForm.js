@@ -58,7 +58,11 @@ class CoursesForm extends React.Component {
     if (id) {
       inputValues = this.props.objectToEdit;
       if (!inputValues.time) {
-        inputValues.time = [{}];
+        console.log(inputValues)
+        inputValues.time = [{
+
+
+        }];
       }
     } else {
       inputValues = {
@@ -69,6 +73,9 @@ class CoursesForm extends React.Component {
         classId: null,
         time: [{}]
       };
+    }
+    if(!inputValues.time[0]){
+      inputValues.time[0] = {}
     }
     return (
       <div className="main">
@@ -112,7 +119,7 @@ class CoursesForm extends React.Component {
           <input
             ref="startTime"
             defaultValue={
-              inputValues && inputValues.time[0].startTime
+              inputValues && inputValues.time[0]
                 ? inputValues.time[0].startTime
                 : ""
             }
@@ -120,13 +127,14 @@ class CoursesForm extends React.Component {
             id="time"
             name="time"
             onChange={e => {
+              console.log(inputValues);
               inputValues.time[0].startTime = e.target.value;
             }}
           />
           <input
             ref="endTime"
             defaultValue={
-              inputValues && inputValues.time[0].endTime
+              inputValues && inputValues.time[0]
                 ? inputValues.time[0].endTime
                 : ""
             }
@@ -208,10 +216,10 @@ class CoursesForm extends React.Component {
           >
             {
               <option value="" default>
-                {" "}
+
                 {inputValues && inputValues.time[0].weekDay
                   ? `${inputValues.time[0].weekDay}`
-                  : "Choose a weekDay"}{" "}
+                  : "Choose a weekDay"}
               </option>
             }
 
@@ -224,6 +232,7 @@ class CoursesForm extends React.Component {
               );
             })}
           </select>
+
           <div className="error"> {weekDayError} </div>
 
           <div className="error"> {"" + this.props.message} </div>
@@ -234,6 +243,7 @@ class CoursesForm extends React.Component {
                 className="edit-button"
                 onClick={e => {
                   e.preventDefault();
+                  console.log(inputValues);
                   this.validate(inputValues);
                   this.props.onSubmit(inputValues);
                 }}

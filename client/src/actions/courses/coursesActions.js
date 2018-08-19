@@ -145,8 +145,9 @@ export function updateCourses(input) {
         dispatch(generalFetch(`admin/time/edit`, "put", timeBody))
           .then(time => {
             dispatch(messageNotification(time.message))
+            dispatch(getCourses())
           })
-        return dispatch(getCourses())
+          return dispatch(getCourses())
       })
 
       .catch(error => {

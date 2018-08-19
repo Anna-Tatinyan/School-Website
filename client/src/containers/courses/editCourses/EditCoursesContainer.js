@@ -13,11 +13,12 @@ class EditCoursesContainer extends React.Component {
   }
   render() {
     let objectToEdit = {};
-
-    for(let i = 0; i<this.props.coursesArray.length; i++){
-          if(this.props.coursesArray[i].id == this.props.match.params.id){
-           objectToEdit = this.props.coursesArray[i]
-          }
+    if(this.props.coursesArray) {
+      for(let i = 0; i<this.props.coursesArray.length; i++){
+            if(this.props.coursesArray[i].id == this.props.match.params.id){
+             objectToEdit = this.props.coursesArray[i]
+            }
+      }
     }
     return (
       <CoursesForm  onSubmit = {this.props.updateCourses} classesArray ={this.props.classesArray} message = {this.props.message} teachersArray ={this.props.teachersArray} objectToEdit = {objectToEdit} id = {this.props.match.params.id}/>

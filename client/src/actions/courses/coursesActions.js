@@ -47,7 +47,6 @@ export function addCourses(input, shouldEdit) {
 
 
       }
-      console.log(timeBody)
       dispatch(generalFetch('admin/time', 'post', timeBody))
         .then(time => {
           dispatch(messageNotification(time.message))
@@ -135,7 +134,8 @@ export function updateCourses(input) {
     "courseId": input.id,
     "startTime": input.time[0].startTime,
     "endTime": input.time[0].endTime,
-    "weekDay": input.time[0].weekDay
+    "weekDay": input.time[0].weekDay,
+    "classId": input.classId
 
   }
   return dispatch => {
@@ -143,11 +143,12 @@ export function updateCourses(input) {
     dispatch(generalFetch(`admin/courses/${input.id}`, "put", updateBody))
       .then(result => {
         dispatch(generalFetch(`admin/time/edit`, "put", timeBody))
+          .then(time => {
+            dispatch(messageNotification(time.message))
+          })
         return dispatch(getCourses())
       })
-      .then(result => {
-        return dispatch(getCourses())
-      })
+
       .catch(error => {
         console.log('request failed', error);
       });

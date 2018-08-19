@@ -13,13 +13,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       teacherId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: 'Teachers',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE'
       },
         classId: {
           type: Sequelize.INTEGER,

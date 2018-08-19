@@ -11,14 +11,16 @@ class EditCoursesContainer extends React.Component {
     this.props.getTeachers();
     this.props.getCourses();
   }
-  render() {let objectToEdit = {};
+  render() {
+    let objectToEdit = {};
+
     for(let i = 0; i<this.props.coursesArray.length; i++){
           if(this.props.coursesArray[i].id == this.props.match.params.id){
            objectToEdit = this.props.coursesArray[i]
           }
     }
     return (
-      <CoursesForm  onSubmit = {this.props.updateCourses} coursesArray = {this.props.coursesArray} objectToEdit = {objectToEdit} id = {this.props.match.params.id}/>
+      <CoursesForm  onSubmit = {this.props.updateCourses} classesArray ={this.props.classesArray} message = {this.props.message} teachersArray ={this.props.teachersArray} objectToEdit = {objectToEdit} id = {this.props.match.params.id}/>
 
     )
   }
@@ -27,6 +29,9 @@ function mapStateToProps(state) {
 
     return {
       coursesArray: state.getCoursesArray.coursesArray,
+      teachersArray: state.getTeachersArray.teachersArray,
+      classesArray: state.getClassesArray.classesArray,
+      message: state.getCoursesArray.errorMessage
     };
 }
 

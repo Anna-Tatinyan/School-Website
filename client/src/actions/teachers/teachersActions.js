@@ -67,12 +67,28 @@ export function deleteTeacher(id) {
     dispatch(generalFetch(`admin/teachers/${id}`, 'delete', deleteBody))
 
     .then(result => {
+      if(result.error.name === "SequelizeForeignKeyConstraintError") {
+        dispatch(errorMessage("You cannot eliminate a teacher that has a class"))
+      }
       return dispatch(getTeachers())
     })
 
     .catch(error => {
       console.log('request failed', error);
     });
+}
+export function errorMessage(message) {
+
+  return {
+    message,
+    type: actionConstant.DELETE_ERROR
+  };
+}
+
+export function deleteErrorMessage() {
+  return {
+    type: actionConstant.RESET_MESSAGE
+  }
 }
 
 

@@ -9,6 +9,7 @@
     "dotenv": "^6.0.0",
     "react": "^16.4.2",
     "react-bootstrap": "^0.32.1",
+    "react-bootstrap-sweetalert": "^4.4.1",
     "react-dom": "^16.4.1",
     "react-icons-kit": "^1.1.7",
     "react-images": "^0.5.19",

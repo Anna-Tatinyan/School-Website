@@ -2,7 +2,8 @@ import actionConstant from "../constants/actionConstant";
 
 const initialState = {
 
-  teachersArray: []
+  teachersArray: [],
+  errorMessage: ""
 };
 
 export function getTeachersArray(state = initialState, action) {
@@ -17,6 +18,18 @@ export function getTeachersArray(state = initialState, action) {
 
         teachersArray: action.teachersArray
       });
+      case actionConstant.DELETE_ERROR:
+
+        return Object.assign({}, state, {
+          ...state,
+
+          errorMessage: action.message
+        });
+        case actionConstant.RESET_MESSAGE:
+          return {
+            ...state,
+            errorMessage: null
+          };
 
     default:
       return state;

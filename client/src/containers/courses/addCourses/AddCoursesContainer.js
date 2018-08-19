@@ -16,7 +16,7 @@ class AddCoursesContainer extends React.Component {
   render() {
 
     return (
-      <CoursesForm   classesArray ={this.props.classesArray} teachersArray ={this.props.teachersArray} onSubmit = {this.props.addCourses}   deleteAddedId = {this.props.deleteAddedId} newID = {this.props.newID}/>
+      <CoursesForm   classesArray ={this.props.classesArray} message = {this.props.message} teachersArray ={this.props.teachersArray} onSubmit = {this.props.addCourses}   deleteAddedId = {this.props.deleteAddedId} newID = {this.props.newID}/>
 
     )
   }
@@ -25,7 +25,8 @@ const mapStateToProps = (state) => {
   return ({
     teachersArray: state.getTeachersArray.teachersArray,
     classesArray: state.getClassesArray.classesArray,
-    newID: state.onSubmitReducer.newID
+    newID: state.onSubmitReducer.newID,
+    message: state.getCoursesArray.errorMessage
   })
 }
 

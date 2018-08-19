@@ -1,7 +1,6 @@
 const {Classes, Teachers} = require('../../models/index');
 const sequelize = require('sequelize');
 const express = require('express');
-const op = sequelize.Op;
 
 exports.getAvailableTeachers = function(req,res){
   let availableTeachersArray = [];

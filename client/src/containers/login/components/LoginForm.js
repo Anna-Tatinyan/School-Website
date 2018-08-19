@@ -2,8 +2,8 @@
 import React from 'react';
 import './login.css';
 import validator from 'validator';
-import image from "./blur.jpg"
-import logo from "./logo.jpg"
+import image from "../images/blur.jpg"
+import logo from "../images/logo.jpg"
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -31,9 +31,19 @@ class LoginForm extends React.Component {
       let validationWarning;
       if(password && email) {
             const validateEmail = validator.isEmail(email);
-            !validateEmail ? validationWarning = "Email in not valid" : true;
+            if(validateEmail) {
+               validationWarning = "Email in not valid"
+            }
+            else {
+                validationWarning = ""
+            }
             const passwordValidate = validator.isLength(password, { min: 3 });
-            !passwordValidate ? validationWarning =  "Password in too short": true;
+            if(passwordValidate) {
+               validationWarning = "Email in not valid"
+            }
+            else {
+                validationWarning = ""
+            }
             const emptyEmail = validator.isEmpty(email);
             const emptyPassword = validator.isEmpty(password);
             const isButtonEnabled =  validateEmail && !emptyPassword && !emptyEmail && passwordValidate
@@ -77,7 +87,7 @@ class LoginForm extends React.Component {
                   			</div>
                         <div className="wrap-input100 validate-input m-b-18">
                           <span className="label-input100">Password</span>
-                          <input className="input100" type="text" name="password" required
+                          <input className="input100" type="password" name="password" required
                                 onChange={this.changeHandler} value={password} />
                           <span className="focus-input100"></span>
                         </div>

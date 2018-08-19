@@ -1,15 +1,6 @@
 import React from 'react';
 import "../../../../index.css"
-import { Router, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
 import  history  from '../../../../history';
-import SideNav, { Nav, NavIcon, NavText } from 'react-sidenav';
-import SvgIcon from 'react-icons-kit';
-import {user} from 'react-icons-kit/ikons/user';
-import {book} from 'react-icons-kit/oct/book';
-import {university} from 'react-icons-kit/ionicons/university';
-import {home} from 'react-icons-kit/iconic/home';
-import {iosTrash} from 'react-icons-kit/ionicons/iosTrash'
 
 import Modal from '../../../../components/modal.js'
 
@@ -40,13 +31,7 @@ class TeachersList extends React.Component {
     }
 
     render() {
-      const styles = {
-          width: '180px',
-          height: '100%',
-          background: '#2c3e50',
-          color: '#FFF',
-          position: 'fixed',
-    };
+
     const tableStyle = {
       margin: " 10% 10px 0 58px",
     }
@@ -61,6 +46,7 @@ class TeachersList extends React.Component {
       <button className="blue" style={blueStyle} onClick={ () => history.push('/admin/teachers/add')}>
       Add Teacher</button>
   <table className="table" style={tableStyle}>
+  <tbody>
        <tr className = "header">
          <th>firstname</th>
          <th>lastname</th>
@@ -68,9 +54,12 @@ class TeachersList extends React.Component {
          <th>email</th>
          <th>options</th>
        </tr>
-      { this.props.teachersArray.map((teacherObject, index) => {  if(this.state.row === index){ this.updatedTeacherObject = this.props.teachersArray[index]} return(
+      { this.props.teachersArray ? this.props.teachersArray.map((teacherObject, index) => {
+          if(this.state.row === index){
+            this.updatedTeacherObject = this.props.teachersArray[index]}
+            return(
 
-          <tr>
+          <tr key={teacherObject.id}>
                  <td>{teacherObject.firstName}</td>
                  <td>{teacherObject.lastName}</td>
                  <td>{teacherObject.phone}</td>
@@ -83,8 +72,9 @@ class TeachersList extends React.Component {
                  </td>
              </tr>
 
-        )})
+        )}) : true
     }
+    </tbody>
       </table>
 
 

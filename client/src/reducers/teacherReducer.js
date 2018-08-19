@@ -1,9 +1,8 @@
-
 import actionConstant from "../constants/actionConstant";
-import history from "../history";
+
 const initialState = {
 
-   teachersArray: []
+  teachersArray: []
 };
 
 export function getTeachersArray(state = initialState, action) {
@@ -11,18 +10,15 @@ export function getTeachersArray(state = initialState, action) {
   switch (action.type) {
 
 
-      case actionConstant.GET_TEACHER: {
+    case actionConstant.GET_TEACHER:
 
-            return Object.assign({}, state, {
-              ...state,
+      return Object.assign({}, state, {
+        ...state,
 
-              teachersArray: action.teachersArray
-            });
-          }
+        teachersArray: action.teachersArray
+      });
 
-
-        break;
-        default:
-          return state;
-    }
+    default:
+      return state;
   }
+}

@@ -1,5 +1,5 @@
 import actionConstant from '../../constants/actionConstant';
-import fetch from "isomorphic-fetch";
+
 import {
   setNewId
 } from "../commonActions"
@@ -34,7 +34,7 @@ export function getTeachers() {
 }
 
 
-export function addTeacher(input) {
+export function addTeacher(input, shouldEdit) {
   const addBody = {
     "firstName": input.firstName,
     "lastName": input.lastName,
@@ -46,7 +46,9 @@ export function addTeacher(input) {
 
     dispatch(generalFetch('admin/teachers', 'post', addBody))
     .then((result) => {
-      dispatch(setNewId(result.id));
+      if (shouldEdit) {
+        dispatch(setNewId(result.id));
+      }
       return dispatch(getTeachers())
     })
 

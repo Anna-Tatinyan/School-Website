@@ -32,7 +32,7 @@ export function getStudents() {
     });
 }
 
-export function addStudent(input) {
+export function addStudent(input, shouldEdit) {
   const addBody = {
     "firstName": input.firstName,
     "lastName": input.lastName,
@@ -47,7 +47,9 @@ export function addStudent(input) {
 
     dispatch(generalFetch('admin/students', 'post', addBody))
     .then((result) => {
-      dispatch(setNewId(result.id));
+      if (shouldEdit) {
+        dispatch(setNewId(result.id));
+      }
       return dispatch(getStudents())
     })
 
@@ -90,6 +92,10 @@ export function updateStudent(input) {
   return dispatch => {
 
     dispatch(generalFetch(`admin/students/${input.id}`, "put", updateBody))
+    .then(result => {
+      return dispatch(getStudents())
+    })
+
 
       .catch(error => {
         console.log('request failed', error);

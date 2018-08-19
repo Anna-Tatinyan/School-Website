@@ -1,5 +1,3 @@
-import actionConstant from '../constants/actionConstant';
-
 const headersDefault = {
   'Accept': 'application/json',
   'Content-Type': 'application/json',
@@ -7,7 +5,6 @@ const headersDefault = {
 };
 
 export function generalFetch(url, method, body, headers = headersDefault) {
-
   return dispatch =>
 
     fetch(`http://${process.env.REACT_APP_HOST}:${process.env.REACT_APP_SERVER_PORT}/${url}`, {
@@ -16,7 +13,6 @@ export function generalFetch(url, method, body, headers = headersDefault) {
       body: JSON.stringify(body)
     })
     .then(response => {
-
       return response.json()
 
     })

@@ -1,15 +1,7 @@
 import React from 'react';
 import "../../../../index.css"
-import { Router, Route } from 'react-router-dom';
-import { connect } from 'react-redux';
 import  history  from '../../../../history';
-import SideNav, { Nav, NavIcon, NavText } from 'react-sidenav';
-import SvgIcon from 'react-icons-kit';
-import {user} from 'react-icons-kit/ikons/user';
-import {book} from 'react-icons-kit/oct/book';
-import {university} from 'react-icons-kit/ionicons/university';
-import {home} from 'react-icons-kit/iconic/home';
-import {iosTrash} from 'react-icons-kit/ionicons/iosTrash'
+
 
 import Modal from '../../../../components/modal.js'
 
@@ -41,13 +33,6 @@ class ClassesList extends React.Component {
     }
 
     render() {
-      const styles = {
-          width: '180px',
-          height: '100%',
-          background: '#2c3e50',
-          color: '#FFF',
-          position: 'fixed',
-      };
       const tableStyle = {
         margin: " 10% 12px 0 45px",
       }
@@ -66,32 +51,37 @@ class ClassesList extends React.Component {
       Add Classes</button>
 
       <table style={tableStyle} className="table">
-      <tr className = "header">
-         <th>name</th>
-         <th>teacher</th>
-         <th>options</th>
-       </tr>
-      { this.props.classesArray  ? this.props.classesArray.map((classesObject, index) => {  if(this.state.row === index){ this.updatedClassesObject = this.props.classesArray[index]} return(
+        <tbody>
+        <tr className = "header">
+           <th>name</th>
+           <th>teacher</th>
+           <th>options</th>
+         </tr>
+        { this.props.classesArray  ? this.props.classesArray.map((classesObject, index) => {
+          if(this.state.row === index){
+            this.updatedClassesObject = this.props.classesArray[index]}
+            return(
 
-          <tr>
+            <tr key={classesObject.id}>
 
-                  <td>{classesObject.name}</td>
-                  <td>{ !classesObject.Teacher ? 'not available': classesObject.Teacher.firstName + ' ' + classesObject.Teacher.lastName}</td>
+                   <td>{classesObject.name}</td>
+                   <td>{ !classesObject.Teacher ? 'not available': classesObject.Teacher.firstName + ' ' + classesObject.Teacher.lastName}</td>
 
-                 <td style={tableWidth}>
-                 <button className="btn" onClick={ ()=>{  this.setState({row: index, showModal: true}); }} > <i className="fa fa-trash"></i>
-                 </button>
-                 <button className="btn"  onClick={ () => history.push(`/admin/classes/edit/${classesObject.id}`)}><i className="fa fa-cog fa-spin"></i>
-                 </button>
-                 </td>
-             </tr>
+                   <td style={tableWidth}>
+                   <button className="btn" onClick={ ()=>{  this.setState({row: index, showModal: true}); }} > <i className="fa fa-trash"></i>
+                   </button>
+                   <button className="btn"  onClick={ () => history.push(`/admin/classes/edit/${classesObject.id}`)}><i className="fa fa-cog fa-spin"></i>
+                   </button>
+                   </td>
+          </tr>
 
-        )} ) : true
-    }
-      </table>
+          )} ) : true
+      }
+      </tbody>
+    </table>
 
 
-      <Modal show={this.state.showModal}>
+    <Modal show={this.state.showModal}>
 
           <div className="modal-body">
               <p className = "warning">Are you sure you want to permanently delete it? </p>

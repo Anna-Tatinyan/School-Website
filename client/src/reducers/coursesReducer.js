@@ -1,9 +1,9 @@
-
 import actionConstant from "../constants/actionConstant";
-import history from "../history";
+
 const initialState = {
 
-  coursesArray: []
+  coursesArray: [],
+  errorMessage: ""
 };
 
 export function getCoursesArray(state = initialState, action) {
@@ -11,17 +11,23 @@ export function getCoursesArray(state = initialState, action) {
   switch (action.type) {
 
 
-      case actionConstant.GET_COURSE: {
+    case actionConstant.GET_COURSE:
 
-            return Object.assign({}, state, {
-              ...state,
+      return Object.assign({}, state, {
+        ...state,
 
-              coursesArray: action.coursesArray
-            });
-          }
+        coursesArray: action.coursesArray
+      });
 
-        break;
-        default:
-          return state;
-    }
+    case actionConstant.MESSAGE_NOTIFY:
+
+      return Object.assign({}, state, {
+        ...state,
+
+        errorMessage: action.message
+      });
+
+    default:
+      return state;
   }
+}

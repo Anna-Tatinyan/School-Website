@@ -1,6 +1,5 @@
-
 import actionConstant from "../constants/actionConstant";
-import history from "../history";
+
 const initialState = {
 
   isLoggingIn: false,
@@ -9,7 +8,7 @@ const initialState = {
 };
 export function userLogin(state = initialState, action) {
   switch (action.type) {
-    case actionConstant.LOGIN_ATTEMPT: {
+    case actionConstant.LOGIN_ATTEMPT:
 
       return {
         ...state,
@@ -18,27 +17,26 @@ export function userLogin(state = initialState, action) {
         email: action.email,
         password: action.password
       };
-    }
 
-    case actionConstant.LOGGED_FAILED: {
+
+    case actionConstant.LOGGED_FAILED:
       return {
         ...state,
         error: action.error,
         isLoggingIn: false,
         isLoggedIn: false
       };
-    }
-    case actionConstant.LOGGED_SUCCESSFULLY: {
+
+    case actionConstant.LOGGED_SUCCESSFULLY:
       return {
         ...state,
         error: null,
         isLoggingIn: false,
         isLoggedIn: true
       };
-    }
 
-    break;
+
     default:
       return state
-    }
   }
+}

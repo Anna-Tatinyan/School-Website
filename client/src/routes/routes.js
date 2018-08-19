@@ -1,10 +1,10 @@
 import React from 'react';
-import { Router, Route, IndexRoute, Switch } from 'react-router';
+import { Router, Route, Switch } from 'react-router';
 import { Redirect } from 'react-router-dom';
 
 import Login from '../containers/login/Login.js';
 import Home from '../components/home/Home.js';
-import Error from '../components/error/Error.js';
+import ErrorPage from '../components/error/Error.js';
 import history from '../history';
 import Admin from "../components/admin/Admin";
 import { PrivateRoute } from './privateRoute';
@@ -55,9 +55,7 @@ export default class Routy extends React.Component{
 
           <PrivateRoute exact path="/admin/classes/add" component={AddClasses} />
           <PrivateRoute exact path="/admin/classes/edit/:id" component={EditClasses} />
-          <Route component={Error} />
-
-           //nav items and route will automatically updated upon selection
+          <Route component={ErrorPage} />
 
         </Switch>
     </Router>

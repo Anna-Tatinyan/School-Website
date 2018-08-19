@@ -1,35 +1,6 @@
 import React from 'react';
 import "./admin.css"
-import {
-  Router,
-  Route
-} from 'react-router-dom';
 
-import history from '../../history';
-import {
-  PrivateRoute
-} from '../../routes/privateRoute';
-
-
-import SideNav, {
-  Nav,
-  NavIcon,
-  NavText
-} from 'react-sidenav';
-import SvgIcon from 'react-icons-kit';
-import {
-  user
-} from 'react-icons-kit/ikons/user';
-import {
-  book
-} from 'react-icons-kit/oct/book';
-import {
-  university
-} from 'react-icons-kit/ionicons/university'
-import {
-  home
-} from 'react-icons-kit/iconic/home'
-import studentsImg from "./adminStudent.jpg"
 
 
 import Gallery from 'react-photo-gallery';
@@ -113,32 +84,21 @@ class Admin extends React.Component {
   }
 
   render() {
-    const styles = {
-      width: '180px',
-      height: '100%',
-      background: '#2c3e50',
-      color: '#FFF',
-      position: 'fixed',
-    };
 
     return ( <
       div className = "main" >
-      <
-      div className = "header" >
-      <
-      h1 className = "head" > Welcome to your School Website < /h1>
+      <div className = "header" >
+      <h1 className = "head" > Welcome to your School Website < /h1>
 
-      <
-      div >
-      <
-      Gallery photos = {
+      <div >
+      <Gallery photos = {
         photos
       }
       onClick = {
         this.openLightbox
       }
-      /> <
-      Lightbox images = {
+      />
+      <Lightbox images = {
         photos
       }
       onClose = {
@@ -156,12 +116,11 @@ class Admin extends React.Component {
       isOpen = {
         this.state.lightboxIsOpen
       }
-      /> <
-      /div> <
-      /div>
+      />
+      </div >
+      </div>
 
-      <
-      /div>
+      </div>
     )
   }
 }

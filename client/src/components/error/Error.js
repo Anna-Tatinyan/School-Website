@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './error.css'
 import gif from './GIFF.gif'
+import history from '../../history'
 class Error extends Component {
  render() {
    return (
@@ -10,6 +11,9 @@ class Error extends Component {
       <h3 className="errorBottom">This page is not found</h3>
     </div>
       <div>
+      <button className="go-back" onClick = {history.goBack}>
+      Go back
+      </button>
       <img alt="gif" className="gif" src={gif}/>
       </div>
 

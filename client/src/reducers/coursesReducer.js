@@ -26,6 +26,12 @@ export function getCoursesArray(state = initialState, action) {
 
         errorMessage: action.message
       });
+      case actionConstant.DELETE_MESSAGE:
+        return {
+          ...state,
+          errorMessage: null
+        };
+
 
     default:
       return state;

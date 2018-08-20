@@ -19,7 +19,7 @@ exports.addCoursesTime = function(req, res) {
     .then(allTime => {
       let isValid = true;
       for (let i = 0; i < allTime.length; i++) {
-        if ((allTime[i].endTime <= req.body.startTime || allTime[i].startTime >= req.body.endTime)) {
+        if (!(allTime[i].endTime <= req.body.startTime || allTime[i].startTime >= req.body.endTime)) {
           isValid = false;
           res.send({
             "code": 416,

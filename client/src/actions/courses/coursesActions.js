@@ -94,6 +94,12 @@ export function messageNotification(message) {
     type: actionConstant.MESSAGE_NOTIFY
   };
 }
+export function messageDelete() {
+
+  return {
+    type: actionConstant.DELETE_MESSAGE
+  };
+}
 
 export function getAvailableTeachers() {
   return dispatch =>

@@ -35,7 +35,7 @@ class LoginForm extends React.Component {
       }
       const passwordValidate = validator.isLength(password, { min: 3 });
       if (passwordValidate) {
-        validationWarning = "Email in not valid";
+        validationWarning = "Password in not valid";
       } else {
         validationWarning = "";
       }

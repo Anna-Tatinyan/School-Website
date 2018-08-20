@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {  updateCourses, getCourses, getClasses, getTeachers  } from '../../../actions/';
+import {  updateCourses, getCourses, getClasses, getTeachers, messageDelete  } from '../../../actions/';
 
 import CoursesForm from '../components/CoursesForm'
 
@@ -21,7 +21,7 @@ class EditCoursesContainer extends React.Component {
       }
     }
     return (
-      <CoursesForm  onSubmit = {this.props.updateCourses} classesArray ={this.props.classesArray} message = {this.props.message} teachersArray ={this.props.teachersArray} objectToEdit = {objectToEdit} id = {this.props.match.params.id}/>
+      <CoursesForm  onSubmit = {this.props.updateCourses} classesArray ={this.props.classesArray} messageDelete = {this.props.messageDelete} message = {this.props.message} teachersArray ={this.props.teachersArray} objectToEdit = {objectToEdit} id = {this.props.match.params.id}/>
 
     )
   }
@@ -36,4 +36,4 @@ function mapStateToProps(state) {
     };
 }
 
-export default connect(mapStateToProps, { getClasses, getTeachers, updateCourses, getCourses})(EditCoursesContainer);
+export default connect(mapStateToProps, { getClasses, getTeachers, messageDelete, updateCourses, getCourses})(EditCoursesContainer);

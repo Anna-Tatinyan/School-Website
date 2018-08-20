@@ -172,13 +172,13 @@ class StudentForm extends React.Component {
                     : "Choose a class"}{" "}
                 </option>
               }
-              {this.props.classesArray.map((item, index) => {
+              { (this.props.classesArray ? this.props.classesArray.map((item, index) => {
                 return (
                   <option key={item.id} value={item.id}>
                     {`${item.name}`}
                   </option>
                 );
-              })}
+              }) : true)}
             </select>
           </div>
           <div className="error"> {classIdError} </div>

@@ -9,11 +9,11 @@ class Error extends Component {
      <div className="error-div">
       <h2 className="errorRight">ERROR 404</h2>
       <h3 className="errorBottom">This page is not found</h3>
-    </div>
-      <div>
       <button className="go-back" onClick = {history.goBack}>
       Go back
       </button>
+    </div>
+      <div>
       <img alt="gif" className="gif" src={gif}/>
       </div>
 

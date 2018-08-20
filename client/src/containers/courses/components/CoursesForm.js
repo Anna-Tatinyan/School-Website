@@ -21,6 +21,9 @@ class CoursesForm extends React.Component {
       history.push(`../courses/edit/${this.props.newID}`);
     }
   }
+  componentDidMount(){
+    this.props.messageDelete()
+  }
   validate(input) {
     !input.name
       ? this.setState({ nameError: "Name is required" })
@@ -58,7 +61,6 @@ class CoursesForm extends React.Component {
     if (id) {
       inputValues = this.props.objectToEdit;
       if (!inputValues.time) {
-        console.log(inputValues)
         inputValues.time = [{
 
 
@@ -127,7 +129,6 @@ class CoursesForm extends React.Component {
             id="time"
             name="time"
             onChange={e => {
-              console.log(inputValues);
               inputValues.time[0].startTime = e.target.value;
             }}
           />
@@ -235,7 +236,7 @@ class CoursesForm extends React.Component {
 
           <div className="error"> {weekDayError} </div>
 
-          <div className="error"> {"" + this.props.message} </div>
+          <div className="error"> {this.props.message} </div>
 
           {this.props.id ? (
             <div>
@@ -243,7 +244,6 @@ class CoursesForm extends React.Component {
                 className="edit-button"
                 onClick={e => {
                   e.preventDefault();
-                  console.log(inputValues);
                   this.validate(inputValues);
                   this.props.onSubmit(inputValues);
                 }}
